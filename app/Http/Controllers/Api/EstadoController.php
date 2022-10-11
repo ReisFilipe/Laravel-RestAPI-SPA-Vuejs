@@ -39,7 +39,7 @@ class EstadoController extends Controller
                 $estadoRepository->selectFilter($request->get('fields'));
             }
     
-            return new EstadoCollection($estadoRepository->getResult()->get());
+            return json_encode(new EstadoCollection($estadoRepository->getResult()->get()));
         }catch (Exception $e){
             $message = new ApiMessage($e->getMessage());
             return response()->json($message->getMessage(), 401);
@@ -51,7 +51,7 @@ class EstadoController extends Controller
     {
         try{
             $estado = $this->estado->findOrFail($id);
-            return new EstadoResource($estado);
+            return json_encode(new EstadoResource($estado));
         }catch (Exception $e){
             $message = new ApiMessage($e->getMessage());
             return response()->json($message->getMessage(), 401);
@@ -114,17 +114,23 @@ class EstadoController extends Controller
         }
     }
 
-    public function cidade($id)
+    public function cidade($sigla)
     {
         try{
-            $estado = $this->estado->findOrFail($id);
+            $estado = $this->estado->findOrFail($sigla);
 
-            return response()->json([
+            return json_encode(response()->json([
                 'data' => $estado->cidades
-            ], 200);
+            ], 200));
         }catch (Exception $e){
             $message = new ApiMessage($e->getMessage());
             return response()->json($message->getMessage(), 401);
         }
+    }
+
+    public function getEstados()
+    {
+        $data = ModelsEstado::select('id', 'nome')->get();
+        return response()->json($data);
     }
 }

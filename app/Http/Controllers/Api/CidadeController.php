@@ -112,4 +112,10 @@ class CidadeController extends Controller
             return response()->json($message->getMessage(), 401);
         }
     }
+
+    public function getCidades(Request $request)
+    {
+        $data = Cidade::where('estado_id', $request->idUF)->get();
+        return response()->json($data);
+    }
 }

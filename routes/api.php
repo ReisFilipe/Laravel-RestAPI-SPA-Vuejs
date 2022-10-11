@@ -23,11 +23,12 @@ Route::controller(RegisterController::class)->group(function(){
 
 });
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+Route::middleware('auth:sanctum')->get('/estado', function (Request $request) {
     return $request->user();
 });
-
-Route::prefix('v1')->middleware('auth:sanctum')->group(function(){
+## Depois colocar validação de usuario logado 
+##Route::prefix('v1')->middleware('auth:sanctum')->group(function(){
+Route::prefix('v1')->group(function(){
 
     Route::namespace('estado.')->group(function(){
 
@@ -47,6 +48,9 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function(){
         Route::put('cidade/{id}', [CidadeController::class, 'update'])->name('update');
         Route::delete('cidade/{id}', [CidadeController::class, 'delete'])->name('delete');
     });
+
+    Route::get('getEstados', [EstadoController::class, 'getEstados'])->name('getEstados');
+    Route::get('getCidades', [CidadeController::class, 'getCidades'])->name('getCidades');
 
 });
 
