@@ -18,7 +18,9 @@
     },
     "dependencies": {
         "@syncfusion/ej2-vue-dropdowns": "^20.3.48",
+        "moment": "^2.29.4",
         "vue-loader": "^17.0.0",
+        "vue-moment": "^4.1.0",
         "vue-router": "^4.1.5",
         "vuex": "^4.0.2",
         "vuex-persistedstate": "^4.1.0"

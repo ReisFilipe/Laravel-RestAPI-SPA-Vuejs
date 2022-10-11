@@ -77,7 +77,7 @@ import axios from 'axios';
             },
             deleteCidade(id) { 
                 axios
-                    .delete(`http://127.0.0.1:8000/api/v1/cidade/${id}`)
+                    .delete(`/api/v1/cidade/${id}`)
                     .then(response => {
                         let i = this.cidades.map(data => data.id).indexOf(id);
                         this.cidades.splice(i, 1)

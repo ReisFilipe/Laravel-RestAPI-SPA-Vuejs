@@ -38,8 +38,8 @@ class EstadoController extends Controller
             {
                 $estadoRepository->selectFilter($request->get('fields'));
             }
-    
-            return json_encode(new EstadoCollection($estadoRepository->getResult()->get()));
+            $result = new EstadoCollection($estadoRepository->getResult()->get());
+            return json_encode($result);
         }catch (Exception $e){
             $message = new ApiMessage($e->getMessage());
             return response()->json($message->getMessage(), 401);

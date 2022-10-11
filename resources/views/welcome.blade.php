@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>SPA Authentication using Laravel 9 Sanctum, Vue 3 and Vite </title>
+        <title>SPA Utilizando Laravel 9 e Vue js 3</title>
 
         <!-- Fonts -->
         <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">

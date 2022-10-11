@@ -13,7 +13,8 @@
 								<th>ID</th>
 								<th>Nome</th>
 								<th>Sigla</th>
-								 <th>Ação</th> 
+								<th>Ação</th> 
+                                <th>Data Criação</th> 
 							</tr>
 							</thead>
 							<tbody>
@@ -21,6 +22,7 @@
 								<td>{{ estado.id }}</td>
 								<td>{{ estado.nome }}</td>
 								<td>{{ estado.sigla }}</td>
+                                <td>{{ estado.created_at  }}</td>
 								<td>
 									<div class="btn-group" role="group">
 										<router-link :to="{name: 'edit-estado', params: { id: estado.id }}" class="btn btn-success">Edit</router-link>
@@ -53,7 +55,7 @@ import axios from 'axios';
                             Accept :'application/json', 
                         }
                         };
-            axios.get('/api/v1/estado/?fields=id,nome,sigla', { headers })
+            axios.get('/api/v1/estado/?fields=id,nome,sigla,created_at', { headers })
                 .then(response => this.estados = response.data);
         },
         methods: {
@@ -67,4 +69,6 @@ import axios from 'axios';
             }
         }
     }
+
+
 </script>

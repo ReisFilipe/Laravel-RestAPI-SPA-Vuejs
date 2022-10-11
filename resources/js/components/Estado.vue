@@ -51,7 +51,7 @@ export default {
                     Accept :'application/json', 
                   }
                  };
-    axios.get("http://127.0.0.1:8000/api/v1/estado/?fields=id,nome,sigla", { headers })
+    axios.get("/api/v1/estado/?fields=id,nome,sigla", { headers })
       .then(response => this.estados = response.data);
       
   }

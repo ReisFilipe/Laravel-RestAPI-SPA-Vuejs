@@ -50,7 +50,7 @@ class CidadeController extends Controller
     {
         try{
             $cidade = $this->cidade->findOrFail($id);
-            return new CidadeResource($cidade);
+            return json_encode(new CidadeResource($cidade));
         }catch (Exception $e){
             $message = new ApiMessage($e->getMessage());
             return response()->json($message->getMessage(), 401);

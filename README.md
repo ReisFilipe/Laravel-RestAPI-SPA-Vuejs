@@ -1,66 +1,131 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Api Laravel com front SPA Single Page Aplication VUE js!
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Api Laravel para listagem de Estados e Cidades.
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+# Instalação
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Atualizar pacotes do laravel 
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+    composer update
 
-## Learning Laravel
+Fazer Migração do Banco de dados 
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+    php artisan migrate
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Inserir registros na tabela estados
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+    php artisan db:seed Estado
 
-## Laravel Sponsors
+Inserir registros na tabela cidades
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+    php artisan db:seed Cidade
 
-### Premium Partners
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+Atualização do Vue 
 
-## Contributing
+    npm install
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-## Code of Conduct
+## Execute o servidor
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+    php artisan serve
 
-## Security Vulnerabilities
+    npm run dev
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Rotas API
 
-## License
+**Login** 
+Metod: POST
+Header: Accept:application/json
+body: email, password
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+[http://127.0.0.1:8000/api/login](http://127.0.0.1:8000/api/login)
+
+**Register**
+Metod: POST
+Header: Content-Type/x-www-form-urlencoded
+body: email, password, c_password
+
+[http://127.0.0.1:8000/api/register](http://127.0.0.1:8000/api/register)
+
+**Listar estados** 
+
+Metod: GET
+Header: Accept:application/json
+query: ?fields={nomes da colunas a serem filtraas separads por virgula}
+
+[http://127.0.0.1:8000/api/v1/estado/?fields=id,nome,sigla](http://127.0.0.1:8000/api/v1/estado/?fields=id,nome,sigla)
+
+Busca concatenando filtro e condição
+Metod: GET
+Header: Accept:application/json
+query: ?fields={nomes da colunas a serem filtraas separads por virgula} & &coditions={coluna}:=:{Informação a ser pesquisada} ( Pode se passar os parametros de buscas do where in, not in, like etc) 
+[http://127.0.0.1:8000/api/estado/?fields=nome,sigla&coditions=nome:=:Acre](http://127.0.0.1:8000/api/estado/?fields=nome,sigla&coditions=nome:=:Acre)
+
+**Atualizar estado**
+
+Metod: POST
+Header: Accept:application/json, Content-Type/x-www-form-urlencoded
+query: id do estado
+
+[http://127.0.0.1:8000/api/v1/estado/30](http://127.0.0.1:8000/api/v1/estado/30)
+
+**Excluir Estado**
+
+Metod: POST
+Header: Accept:application/json
+query: id do estado
+
+[http://127.0.0.1:8000/api/v1/estado/28](http://127.0.0.1:8000/api/v1/estado/28)
+
+
+**Listar cidades** 
+
+Metod: GET
+Header: Accept:application/json
+query: ?fields={nomes da colunas a serem filtraas separads por virgula}
+
+[http://127.0.0.1:8000/api/v1/cidade/?fields=id,nome,sigla](http://127.0.0.1:8000/api/v1/cidade/?fields=id,nome,sigla)
+
+Busca concatenando filtro e condição
+Metod: GET
+Header: Accept:application/json
+query: ?fields={nomes da colunas a serem filtraas separads por virgula} & &coditions={coluna}:=:{Informação a ser pesquisada} ( Pode se passar os parametros de buscas do where in, not in, like etc) 
+[http://127.0.0.1:8000/api/cidade/?fields=nome,sigla&coditions=nome:=:Uberaba](http://127.0.0.1:8000/api/cidade/?fields=nome,sigla&coditions=nome:=:Uberaba)
+
+**Atualizar cidade**
+
+Metod: POST
+Header: Accept:application/json, Content-Type/x-www-form-urlencoded
+query: id da cidade
+
+[http://127.0.0.1:8000/api/v1/cidade/30](http://127.0.0.1:8000/api/v1/cidade/30)
+
+**Excluir Cidade**
+
+Metod: POST
+Header: Accept:application/json
+query: id do cidade
+
+[http://127.0.0.1:8000/api/v1/cidade/28](http://127.0.0.1:8000/api/v1/cidade/28)
+
+All your files and folders are presented as a tree in the file explorer. You can switch from one to another by clicking a file in the tree.
+
+## Dificuldades encontradas
+
+Como não tive experiencia anterior com VUE js, tive um pouco de dificuldade em entender a logica de roteamento e inclusão de requisições.
+
+## API Laravel
+
+Ficou pendente a proteção por token via header pois não consegui implementar no VUE js
+
+## Export a file
+
+You can export the current file by clicking **Export to disk** in the menu. You can choose to export the file as plain Markdown, as HTML using a Handlebars template or as a PDF.
+
+
+# Melhorias a serem feitas
+
+ - [ ] Proteção por token no header da api
+ - [ ] Melhoria dos Filtros de Cidade e Estado
