@@ -47,20 +47,14 @@ import axios from 'axios';
         },
         methods: {
             updateCidade() {
-                let formData = new FormData();
-
-                formData.append('nome', 'name');
-                formData.append('sigla', 'date');
-                formData.append('_method', 'PUT');
-                formData.append('id', this.$route.params.id);
-                const token = axios.get('/sanctum/csrf-cookie')
                 const headers = {headers :
                         { Authorization: `Bearer ${token}`,
                             Accept :'application/json', 
+                            'Content-Type':'application/x-www-form-urlencoded',
                         }
                         };
                 axios
-                    .post(`/api/v1/cidade/`, formData, {headers})
+                    .post(`/api/v1/cidade/${this.$route.params.id}`, this.cidade, {headers})
                     .then((res) => {
                         this.$router.push({ name: 'cidade' });
                     });

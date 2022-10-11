@@ -39,27 +39,21 @@ import axios from 'axios';
         },
         created() {
             axios
-                .get(`http://127.0.0.1:8000/api/v1/estado/${this.$route.params.id}`)
+                .get(`/api/v1/estado/${this.$route.params.id}`)
                 .then((res) => {
                     this.estado = res.data;
                 });
         },
         methods: {
             updateEstado() {
-                let formData = new FormData();
-
-                formData.append('nome', 'name');
-                formData.append('sigla', 'date');
-                formData.append('_method', 'PUT');
-                formData.append('id', this.$route.params.id);
-                const token = axios.get('/sanctum/csrf-cookie')
                 const headers = {headers :
-                        { Authorization: `Bearer ${token}`,
+                        { 
                             Accept :'application/json', 
+                            'Content-Type':'application/x-www-form-urlencoded',
                         }
                         };
                 axios
-                    .post(`http://127.0.0.1:8000/api/v1/estado/`, formData, {headers})
+                    .put(`/api/v1/estado/${this.$route.params.id}`, this.estado, {headers})
                     .then((res) => {
                         this.$router.push({ name: 'estado' });
                     });
